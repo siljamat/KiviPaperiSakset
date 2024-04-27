@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > PeliTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">kivipaperisakset</a>
+</div>
+
+<h1>Coverage Summary for Class: PeliTest (kivipaperisakset)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PeliTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package kivipaperisakset;
+&nbsp;
+&nbsp;import org.junit.jupiter.api.BeforeEach;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;
+<b class="fc">&nbsp;public class PeliTest {</b>
+&nbsp;
+&nbsp;    private Peli peli;
+&nbsp;
+&nbsp;    @BeforeEach
+&nbsp;    void setUp() {
+<b class="fc">&nbsp;        peli = new Peli();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPeliNotNull() {
+<b class="fc">&nbsp;        assertNotNull(peli, &quot;Pelin luominen epäonnistui&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPelaaTasapeli() {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 3; i++) {</b>
+<b class="fc">&nbsp;            peli.tarkistaVoittaja(Pelaaja.Valinta.KIVI, Pelaaja.Valinta.KIVI);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assertEquals(3, peli.getTasapelit(), &quot;Tasapelien määrän tulee olla 3&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(0, peli.getP1().getVoitot(), &quot;Pelaajan 1 voittojen määrän tulee olla 0&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(0, peli.getP2().getVoitot(), &quot;Pelaajan 2 voittojen määrän tulee olla 0&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPelaaPelaaja1Voittaa() {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 3; i++) {</b>
+<b class="fc">&nbsp;            peli.tarkistaVoittaja(Pelaaja.Valinta.KIVI, Pelaaja.Valinta.SAKSET);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assertEquals(3, peli.getP1().getVoitot(), &quot;Pelaajan 1 voittojen määrän tulee olla 3&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(0, peli.getP2().getVoitot(), &quot;Pelaajan 2 voittojen määrän tulee olla 0&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPelaaPelaaja2Voittaa() {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 3; i++) {</b>
+<b class="fc">&nbsp;            peli.tarkistaVoittaja(Pelaaja.Valinta.KIVI, Pelaaja.Valinta.PAPERI);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assertEquals(0, peli.getP1().getVoitot(), &quot;Pelaajan 1 voittojen määrän tulee olla 0&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(3, peli.getP2().getVoitot(), &quot;Pelaajan 2 voittojen määrän tulee olla 3&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPelaaPeliPaattyy() {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 3; i++) {</b>
+<b class="fc">&nbsp;            peli.tarkistaVoittaja(Pelaaja.Valinta.KIVI, Pelaaja.Valinta.PAPERI);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        assertTrue(peli.getP1().getVoitot() &gt;= 3 || peli.getP2().getVoitot() &gt;= 3, &quot;Pelin tulee päättyä, kun jompikumpi pelaajista saavuttaa 3 voittoa&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPelienLukumaaranKasvu() {
+<b class="fc">&nbsp;        peli.pelaa();</b>
+<b class="fc">&nbsp;        assertTrue(peli.getPelatutPelit() &gt;= 3, &quot;Pelattujen pelien lukumäärän tulee olla vähintään 1&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testVoittojenLaskenta() {
+<b class="fc">&nbsp;        peli.pelaa();</b>
+<b class="fc">&nbsp;        assertTrue(peli.getP1().getVoitot() &gt;= 0 &amp;&amp; peli.getP1().getVoitot() &lt;= 3, &quot;Pelaajan 1 voittojen määrän tulee olla välillä 0-3&quot;);</b>
+<b class="fc">&nbsp;        assertTrue(peli.getP2().getVoitot() &gt;= 0 &amp;&amp; peli.getP2().getVoitot() &lt;= 3, &quot;Pelaajan 2 voittojen määrän tulee olla välillä 0-3&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testTasapelienLaskenta() {
+<b class="fc">&nbsp;        peli.pelaa();</b>
+<b class="fc">&nbsp;        assertTrue(peli.getTasapelit() &gt;= 0, &quot;Tasapelien lukumäärän tulisi olla vähintään 0&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void testPeliLoppuuOikein() {
+<b class="fc">&nbsp;        peli.pelaa();</b>
+<b class="fc">&nbsp;        assertTrue(peli.getP1().getVoitot() &gt;= 3 || peli.getP2().getVoitot() &gt;= 3, &quot;Pelin tulisi päättyä, kun jompikumpi pelaajista voittaa kolme kertaa&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-27 16:17</div>
+</div>
+</body>
+</html>

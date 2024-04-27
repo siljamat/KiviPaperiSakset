@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Peli</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">kivipaperisakset</a>
+</div>
+
+<h1>Coverage Summary for Class: Peli (kivipaperisakset)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Peli</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (36/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/**
+&nbsp; * Peli-luokka hallinnoi kivipaperisakset-pelin kulkua ja tuloksia.
+&nbsp; */
+&nbsp;package kivipaperisakset;
+&nbsp;
+&nbsp;public class Peli {
+&nbsp;
+&nbsp;        private Pelaaja p1;
+&nbsp;        private Pelaaja p2;
+<b class="fc">&nbsp;        private int pelatutPelit = 0;</b>
+<b class="fc">&nbsp;        private int tasapelit = 0;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Peli-luokan konstruktori, alustaa kaksi pelaajaa peliin.
+&nbsp;     */
+<b class="fc">&nbsp;        public Peli() {</b>
+<b class="fc">&nbsp;            p1 = new Pelaaja();</b>
+<b class="fc">&nbsp;            p2 = new Pelaaja();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Käynnistää pelin ja hallinnoi pelin kulkua, kunnes jompikumpi pelaaja saavuttaa kolme voittoa.
+&nbsp;     */
+&nbsp;    public void pelaa() {
+&nbsp;
+<b class="fc">&nbsp;        boolean peliLoppui = false;</b>
+<b class="fc">&nbsp;        while (!peliLoppui) {</b>
+<b class="fc">&nbsp;            pelatutPelit++;</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Erä: &quot; + pelatutPelit + &quot; =====================\n&quot;);</b>
+<b class="fc">&nbsp;            Pelaaja.Valinta p1Valinta = p1.pelaajanValinta();</b>
+<b class="fc">&nbsp;            Pelaaja.Valinta p2Valinta = p2.pelaajanValinta();</b>
+&nbsp;
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 1: &quot; + p1Valinta);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 2: &quot; + p2Valinta);</b>
+&nbsp;
+<b class="fc">&nbsp;            tarkistaVoittaja(p1Valinta, p2Valinta);</b>
+&nbsp;
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 1:llä koossa &quot; + p1.getVoitot() + &quot; voittoa.&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 2:lla koossa &quot; + p2.getVoitot() + &quot; voittoa.&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Tasapelien lukumäärä: &quot; + tasapelit + &quot;\n&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((p1.getVoitot() &gt;= 3) || (p2.getVoitot() &gt;= 3)) {</b>
+<b class="fc">&nbsp;                peliLoppui = true;</b>
+<b class="fc">&nbsp;                System.out.println(&quot;KOLME VOITTOA - PELI PÄÄTTYY&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tarkistaa ja ilmoittaa pelin voittajan, päivittäen tarvittaessa voittojen laskuria.
+&nbsp;     * @param p1Valinta Pelaajan 1 valinta
+&nbsp;     * @param p2Valinta Pelaajan 2 valinta
+&nbsp;     * @return Voittanut pelaaja, null tasapelissä
+&nbsp;     */
+&nbsp;    protected Pelaaja tarkistaVoittaja(Pelaaja.Valinta p1Valinta, Pelaaja.Valinta p2Valinta) {
+<b class="fc">&nbsp;        if (p1Valinta == p2Valinta) {</b>
+<b class="fc">&nbsp;            tasapelit++;</b>
+<b class="fc">&nbsp;            System.out.println(&quot;\n\t\t\t Tasapeli \n&quot;);</b>
+<b class="fc">&nbsp;            return null;</b>
+<b class="fc">&nbsp;        } else if ((p1Valinta == Pelaaja.Valinta.KIVI &amp;&amp; p2Valinta == Pelaaja.Valinta.PAPERI) ||</b>
+&nbsp;                (p1Valinta == Pelaaja.Valinta.SAKSET &amp;&amp; p2Valinta == Pelaaja.Valinta.KIVI) ||
+&nbsp;                (p1Valinta == Pelaaja.Valinta.PAPERI &amp;&amp; p2Valinta == Pelaaja.Valinta.SAKSET)) {
+<b class="fc">&nbsp;            p2.lisaaVoitto();</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 2 voittaa \n&quot;);</b>
+<b class="fc">&nbsp;            return p2;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            p1.lisaaVoitto();</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Pelaaja 1 voittaa \n&quot;);</b>
+<b class="fc">&nbsp;            return p1;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Palauttaa pelaajan 1.
+&nbsp;     * @return Pelaaja 1
+&nbsp;     */
+&nbsp;    public Pelaaja getP1() {
+<b class="fc">&nbsp;        return p1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Palauttaa pelaajan 2.
+&nbsp;     * @return Pelaaja 2
+&nbsp;     */
+&nbsp;    public Pelaaja getP2() {
+<b class="fc">&nbsp;        return p2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Palauttaa pelattujen pelien lukumäärän.
+&nbsp;     * @return Pelattujen pelien lukumäärä
+&nbsp;     */
+&nbsp;    public int getPelatutPelit() {
+<b class="fc">&nbsp;        return pelatutPelit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Palauttaa tasapelien lukumäärän.
+&nbsp;     * @return Tasapelien lukumäärä
+&nbsp;     */
+&nbsp;    public int getTasapelit() {
+<b class="fc">&nbsp;        return tasapelit;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-27 16:17</div>
+</div>
+</body>
+</html>
